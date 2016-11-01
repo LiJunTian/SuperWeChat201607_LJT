@@ -137,7 +137,6 @@ public class LoginActivity extends BaseActivity {
 			public void onSuccess() {
 				Log.d(TAG, "login: onSuccess");
 
-
 				// ** manually load all local groups and conversation
 			    EMClient.getInstance().groupManager().loadAllGroups();
 			    EMClient.getInstance().chatManager().loadAllConversations();

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_deep"
+    tools:context="com.hyphenate.chatuidemo.activity.GuideActivity">
+    <include
+        layout="@layout/em_activity_splash"/>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp">
+        <Button
+            android:id="@+id/btn_main_login"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="@string/login"
+            android:textColor="@color/background_white"
+            android:inputType="text"
+            android:background="@drawable/umeng_common_gradient_green"/>
+        <Button
+            android:id="@+id/btn_main_signUp"
+            android:layout_marginTop="20dp"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:text="@string/signUp"
+            android:inputType="text"
+            android:textColor="@color/black_deep"
+            android:background="@drawable/rp_btn_white_normal_shape"/>
+    </LinearLayout>
+</RelativeLayout>

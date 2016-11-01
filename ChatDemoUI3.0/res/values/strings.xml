@@ -1,0 +1,5 @@
+<resources>
+    <item name="icon" type="string">"WeChat"</item>
+    <!--<item name="login" type="string">Login</item>-->
+    <item name="signUp" type="string">Sign up</item>
+</resources>
