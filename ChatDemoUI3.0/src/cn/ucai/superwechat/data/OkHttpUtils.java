@@ -23,7 +23,7 @@ import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.SuperWeChatApplication;
 
 import cn.ucai.superwechat.utils.L;
-import cn.ucai.superwechat.utils.Result;
+import cn.ucai.superwechat.bean.Result;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;

@@ -28,7 +28,7 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 import cn.ucai.superwechat.Constant;
-import cn.ucai.superwechat.DemoHelper;
+import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.domain.EmojiconExampleGroupData;
 import cn.ucai.superwechat.domain.RobotUser;
@@ -89,7 +89,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
     protected void setUpView() {
         setChatFragmentListener(this);
         if (chatType == Constant.CHATTYPE_SINGLE) {
-            Map<String,RobotUser> robotMap = DemoHelper.getInstance().getRobotList();
+            Map<String,RobotUser> robotMap = SuperWeChatHelper.getInstance().getRobotList();
             if(robotMap!=null && robotMap.containsKey(toChatUsername)){
                 isRobot = true;
             }

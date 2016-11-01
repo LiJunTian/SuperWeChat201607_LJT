@@ -1,4 +1,4 @@
-package cn.ucai.superwechat.utils;
+package cn.ucai.superwechat.bean;
 
 import java.io.Serializable;
 

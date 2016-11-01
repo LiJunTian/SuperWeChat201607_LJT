@@ -6,7 +6,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 
 import com.hyphenate.chat.EMClient;
-import cn.ucai.superwechat.DemoHelper;
+import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.activity.GuideActivity;
 
 /**
@@ -14,14 +14,12 @@ import cn.ucai.superwechat.activity.GuideActivity;
  *
  */
 public class SplashActivity extends BaseActivity {
-
 	private static final int sleepTime = 2000;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		setContentView(cn.ucai.superwechat.R.layout.em_activity_splash);
 		super.onCreate(arg0);
-
 		RelativeLayout rootLayout = (RelativeLayout) findViewById(cn.ucai.superwechat.R.id.splash_root);
 //		TextView versionText = (TextView) findViewById(R.id.tv_version);
 
@@ -37,7 +35,7 @@ public class SplashActivity extends BaseActivity {
 
 		new Thread(new Runnable() {
 			public void run() {
-				if (DemoHelper.getInstance().isLoggedIn()) {
+				if (SuperWeChatHelper.getInstance().isLoggedIn()) {
 					// auto login mode, make sure all group and conversation is loaed before enter the main screen
 					long start = System.currentTimeMillis();
 					EMClient.getInstance().groupManager().loadAllGroups();
