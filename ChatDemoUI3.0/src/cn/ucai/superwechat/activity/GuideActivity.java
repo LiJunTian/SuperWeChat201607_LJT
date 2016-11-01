@@ -5,41 +5,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.BaseActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
 
 public class GuideActivity extends BaseActivity {
-    Button mbtnLogin,mbtnsignUp;
+
+    @BindView(R.id.btn_main_login)
+    Button mbtnLogin;
+    @BindView(R.id.btn_main_signUp)
+    Button mbtnsignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(cn.ucai.superwechat.R.layout.activity_guide);
-        initView();
-        setListener();
+        ButterKnife.bind(this);
     }
 
-    private void initView() {
-        mbtnLogin = (Button) findViewById(cn.ucai.superwechat.R.id.btn_main_login);
-        mbtnsignUp = (Button) findViewById(cn.ucai.superwechat.R.id.btn_main_signUp);
-    }
-
-    private void setListener() {
+    @OnClick({R.id.btn_main_login,R.id.btn_main_signUp})
+    public void setListener(View view) {
         final Intent intent = new Intent();
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        switch(view.getId()){
+            case R.id.btn_main_login:
                 intent.setClass(GuideActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mbtnsignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(GuideActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+                break;
+            case R.id.btn_main_signUp:
+                intent.setClass(GuideActivity.this,RegisterActivity.class);
+                break;
+        }
+        startActivity(intent);
     }
 }
