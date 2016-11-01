@@ -1,6 +1,5 @@
 package cn.ucai.superwechat.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +9,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.BaseActivity;
-import cn.ucai.superwechat.ui.LoginActivity;
-import cn.ucai.superwechat.ui.RegisterActivity;
+import cn.ucai.superwechat.utils.MFGT;
 
 public class GuideActivity extends BaseActivity {
 
@@ -28,15 +26,13 @@ public class GuideActivity extends BaseActivity {
 
     @OnClick({R.id.btn_main_login,R.id.btn_main_signUp})
     public void setListener(View view) {
-        final Intent intent = new Intent();
         switch(view.getId()){
             case R.id.btn_main_login:
-                intent.setClass(GuideActivity.this,LoginActivity.class);
+                MFGT.gotoLoginActivity(this);
                 break;
             case R.id.btn_main_signUp:
-                intent.setClass(GuideActivity.this,RegisterActivity.class);
+                MFGT.gotoRegisterActivity(this);
                 break;
         }
-        startActivity(intent);
     }
 }
