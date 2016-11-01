@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_deep"
-    tools:context="com.hyphenate.chatuidemo.activity.GuideActivity">
+    tools:context="cn.ucai.superwechat.activity.GuideActivity">
     <include
         layout="@layout/em_activity_splash"/>
 
@@ -18,7 +18,7 @@
         android:layout_marginBottom="100dp">
         <Button
             android:id="@+id/btn_main_login"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="40dp"
             android:text="@string/login"
             android:textColor="@color/background_white"
@@ -27,7 +27,7 @@
         <Button
             android:id="@+id/btn_main_signUp"
             android:layout_marginTop="20dp"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="35dp"
             android:text="@string/signUp"
             android:inputType="text"
