@@ -2,6 +2,8 @@ package cn.ucai.easeui.domain;
 
 import java.io.Serializable;
 
+import cn.ucai.easeui.utils.EaseCommonUtils;
+
 
 public class User implements Serializable {
 	private String muserName;
@@ -90,24 +92,29 @@ public class User implements Serializable {
 	}
 
 	public String getMAvatarSuffix() {
-		return mavatarSuffix;
+		return mavatarSuffix==null?".jpg":mavatarSuffix;
 	}
 
-//	public String getInitialLetter() {
-//		if(initialLetter == null){
-//			UserUtils.setUserInitialLetter(this);
-//		}
-//		return initialLetter;
-//	}
-//
-//	public void setInitialLetter(String initialLetter) {
-//		this.initialLetter = initialLetter;
-//	}
+	public String getInitialLetter() {
+		if(initialLetter == null){
+			EaseCommonUtils.setAppUserInitialLetter(this);
+		}
+		return initialLetter;
+	}
+
+	public void setInitialLetter(String initialLetter) {
+		this.initialLetter = initialLetter;
+	}
 
 	@Override
 	public String toString() {
 		return "User [muserName=" + muserName + ", muserNick=" + muserNick + ", mavatarId=" + mavatarId
 				+ ", mavatarPath=" + mavatarPath + ", mavatarSuffix=" + mavatarSuffix + ", mavatarType=" + mavatarType
 				+ ", mavatarLastUpdateTime=" + mavatarLastUpdateTime + "]";
+	}
+
+	public String getAvatar() {
+		String path = "http://101.251.196.90:8000/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="+getMUserName()+"&avatarType=user_avatar&m_avatar_suffix="+getMAvatarSuffix()+"&width=200&height=200";
+		return path;
 	}
 }
