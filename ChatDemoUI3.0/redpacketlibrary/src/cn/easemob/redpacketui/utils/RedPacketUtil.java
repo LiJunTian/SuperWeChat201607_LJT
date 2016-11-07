@@ -13,8 +13,9 @@ import com.easemob.redpacketsdk.bean.RPUserBean;
 import com.easemob.redpacketsdk.bean.RedPacketInfo;
 import com.easemob.redpacketsdk.bean.TokenData;
 import com.easemob.redpacketsdk.constant.RPConstant;
-import com.easemob.redpacketui.R;
 import cn.easemob.redpacketui.RedPacketConstant;
+
+import com.easemob.redpacketui.R;
 import com.easemob.redpacketui.callback.GroupMemberCallback;
 import com.easemob.redpacketui.callback.NotifyGroupMemberCallback;
 import com.easemob.redpacketui.ui.activity.RPChangeActivity;

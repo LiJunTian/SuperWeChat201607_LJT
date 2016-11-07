@@ -17,6 +17,8 @@ package cn.ucai.superwechat.ui;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import cn.ucai.easeui.ui.EaseBaseActivity;
+import cn.ucai.superwechat.utils.ExitAppUtils;
+
 import com.umeng.analytics.MobclickAgent;
 
 @SuppressLint("Registered")
@@ -25,6 +27,7 @@ public class BaseActivity extends EaseBaseActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+        ExitAppUtils.getInstance().addActivity(this);
     }
 
     @Override

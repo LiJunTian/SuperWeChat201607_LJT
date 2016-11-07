@@ -8,6 +8,8 @@ import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
+import cn.ucai.superwechat.ui.SettingsActivity;
+import cn.ucai.superwechat.ui.UserProfileActivity;
 
 
 /** Activity跳转方法
@@ -42,6 +44,18 @@ public class MFGT {//从哪来到哪去move from go to
     public static void gotoRegisterActivity(Context context){
         Intent intent = new Intent();
         intent.setClass(context, RegisterActivity.class);
+        startActivity(context,intent);
+    }
+
+    public static void gotoSettingsActivity(Context context){
+        Intent intent = new Intent();
+        intent.setClass(context,SettingsActivity.class);
+        startActivity(context,intent);
+    }
+
+    public static void gotoUserProfileActivity(Context context) {
+        Intent intent = new Intent();
+        intent.setClass(context,UserProfileActivity.class);
         startActivity(context,intent);
     }
 }
