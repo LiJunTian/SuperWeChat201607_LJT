@@ -283,8 +283,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                     Result result = ResultUtils.getResultFromJson(s,User.class);
                     if(result.getRetCode()==0&&result.getRetData()!=null){
                         User u = (User) result.getRetData();
-//                        SuperWeChatHelper.getInstance().saveAppContact(u);
-                        updateLocalAvatar(u);
+                        SuperWeChatHelper.getInstance().saveAppContact(u);
+//                        updateLocalAvatar(u);
                         setPicToView(picData);
                     }else{
                         CommonUtils.showShortToast(R.string.toast_updatephoto_fail);
