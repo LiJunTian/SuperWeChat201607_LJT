@@ -28,12 +28,15 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.easemob.redpacketui.RedPacketConstant;
 import cn.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.EMCallBack;
@@ -50,9 +53,12 @@ import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.adapter.MainTabAdpter;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
+import cn.ucai.superwechat.dialog.TitleMenu.ActionItem;
+import cn.ucai.superwechat.dialog.TitleMenu.TitlePopup;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
 import cn.ucai.easeui.utils.EaseCommonUtils;
+import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.widget.DMTabHost;
 import cn.ucai.superwechat.widget.MFViewPager;
 
@@ -81,7 +87,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 	public boolean isConflict = false;
 	// user account was removed
 	private boolean isCurrentAccountRemoved = false;
-	
+
+	TitlePopup titlePopup;
 	@BindView(R.id.layout_viewPage)
 	MFViewPager mLayoutViewpage;
 	@BindView(R.id.tabHost)
@@ -90,6 +97,9 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 	TextView tvWeiXin;
 	@BindView(R.id.title_add)
 	ImageView ivTitleAdd;
+
+	@BindView(R.id.layout_title)
+	RelativeLayout layoutTitle;
 	/**
 	 * check if current user account was remove
 	 */
@@ -216,7 +226,31 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 
 		mLayoutTabhost.setOnCheckedChangeListener(this);
 		mLayoutViewpage.setOnPageChangeListener(this);
+
+		titlePopup = new TitlePopup(this, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+		titlePopup.addAction(new ActionItem(this,R.string.menu_groupchat,R.drawable.icon_menu_group));
+		titlePopup.addAction(new ActionItem(this,R.string.menu_addfriend,R.drawable.icon_menu_addfriend));
+		titlePopup.addAction(new ActionItem(this,R.string.menu_qrcode,R.drawable.icon_menu_sao));
+		titlePopup.addAction(new ActionItem(this,R.string.menu_money,R.drawable.icon_menu_money));
+		titlePopup.setItemOnClickListener(mOnItemOnClickListener);
 	}
+
+	TitlePopup.OnItemOnClickListener mOnItemOnClickListener = new TitlePopup.OnItemOnClickListener() {
+		@Override
+		public void onItemClick(ActionItem item, int position) {
+			switch (position){
+				case 0:
+					break;
+				case 1:
+					MFGT.gotoAddFriend(MainActivity.this);
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+			}
+		}
+	};
 
 	EMMessageListener messageListener = new EMMessageListener() {
 		
@@ -610,5 +644,10 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
 			@NonNull int[] grantResults) {
 		PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+	}
+
+	@OnClick(R.id.title_add)
+	public void  onClick(View v){
+		titlePopup.show(findViewById(R.id.layout_title));
 	}
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.ui.AddContactActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
@@ -56,6 +57,12 @@ public class MFGT {//从哪来到哪去move from go to
     public static void gotoUserProfileActivity(Context context) {
         Intent intent = new Intent();
         intent.setClass(context,UserProfileActivity.class);
+        startActivity(context,intent);
+    }
+
+    public static void gotoAddFriend(Context context) {
+        Intent intent = new Intent();
+        intent.setClass(context,AddContactActivity.class);
         startActivity(context,intent);
     }
 }
