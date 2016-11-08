@@ -77,6 +77,7 @@ public class UserDetailActivity extends BaseActivity {
                 MFGT.finish(this);
                 break;
             case R.id.btn_detail_add:
+                MFGT.gotoAddFriendActivity(this,user.getMUserName());
                 break;
             case R.id.btn_detail_sendMsg:
                 break;

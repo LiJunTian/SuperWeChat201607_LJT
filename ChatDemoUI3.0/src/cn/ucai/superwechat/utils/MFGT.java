@@ -8,6 +8,7 @@ import cn.ucai.easeui.domain.User;
 import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.AddContactActivity;
+import cn.ucai.superwechat.ui.AddFriendActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
@@ -73,6 +74,13 @@ public class MFGT {//从哪来到哪去move from go to
         Intent intent = new Intent();
         intent.setClass(context,UserDetailActivity.class);
         intent.putExtra(I.User.USER_NAME,user);
+        startActivity(context,intent);
+    }
+
+    public static void gotoAddFriendActivity(Context context,String username){
+        Intent intent = new Intent();
+        intent.setClass(context,AddFriendActivity.class);
+        intent.putExtra(I.User.USER_NAME,username);
         startActivity(context,intent);
     }
 }
