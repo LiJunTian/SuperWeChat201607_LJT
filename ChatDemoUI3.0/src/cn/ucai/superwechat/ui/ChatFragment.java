@@ -96,17 +96,17 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
         }
         super.setUpView();
         // set click listener
-        titleBar.setLeftLayoutClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (EasyUtils.isSingleActivity(getActivity())) {
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                }
-                onBackPressed();
-            }
-        });
+//        titleBar.setLeftLayoutClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                if (EasyUtils.isSingleActivity(getActivity())) {
+//                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//                    startActivity(intent);
+//                }
+//                onBackPressed();
+//            }
+//        });
         ((EaseEmojiconMenu)inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
         if(chatType == EaseConstant.CHATTYPE_GROUP){
             inputMenu.getPrimaryMenu().getEditText().addTextChangedListener(new TextWatcher() {
