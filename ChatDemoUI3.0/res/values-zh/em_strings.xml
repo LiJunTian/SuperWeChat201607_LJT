@@ -276,7 +276,7 @@
     <string name="search_new">搜</string>
     
     <string name="Delete_the_contact">删除联系人</string>
-    <string name="Move_into_the_blacklist_new">移入到黑名单</string>
+    <!--<string name="Move_into_the_blacklist_new">移入到黑名单</string>-->
     <string name="Change_the_group_name">改变群名称</string>
     <string name="Sync_Groups_From_Server">从服务器下载群聊信息</string>
     
