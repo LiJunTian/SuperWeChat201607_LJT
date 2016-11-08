@@ -102,4 +102,18 @@ public class NetDao {
                 .targetClass(String.class)
                 .execute(listener);
     }
+
+    /**
+     * 根据用户名查找用户
+     * @param context  上下文
+     * @param userName 用户名
+     * @param listener 监听
+     */
+    public static void searchUser(Context context, String userName, OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_USER)
+                .addParam(I.User.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }

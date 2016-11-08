@@ -45,7 +45,6 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="cn.ucai.superwechat.permission.MIPUSH_RECEIVE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -246,6 +245,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".ui.UserDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".ui.AddFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <!-- iOS offline push nick -->
         <activity
@@ -475,7 +486,6 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3ecea51f560650b1ed8a4b99808f52e8" />
 
-        <activity android:name=".activity.GuideActivity"></activity>
 
     </application>
 
