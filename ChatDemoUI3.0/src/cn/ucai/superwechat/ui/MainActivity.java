@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 		mLayoutTabhost.setOnCheckedChangeListener(this);
 		mLayoutViewpage.setOnPageChangeListener(this);
 
-		titlePopup = new TitlePopup(this, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+		titlePopup = new TitlePopup(this,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 		titlePopup.addAction(new ActionItem(this,R.string.menu_groupchat,R.drawable.icon_menu_group));
 		titlePopup.addAction(new ActionItem(this,R.string.menu_addfriend,R.drawable.icon_menu_addfriend));
 		titlePopup.addAction(new ActionItem(this,R.string.menu_qrcode,R.drawable.icon_menu_sao));
