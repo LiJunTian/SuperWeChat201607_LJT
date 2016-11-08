@@ -27,6 +27,9 @@ import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
 
 import cn.ucai.easeui.domain.User;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.data.NetDao;
+import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.db.SuperWeChatDBManager;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
@@ -53,6 +56,8 @@ import cn.ucai.easeui.model.EaseAtMessageHelper;
 import cn.ucai.easeui.model.EaseNotifier;
 import cn.ucai.easeui.model.EaseNotifier.EaseNotificationInfoProvider;
 import cn.ucai.easeui.utils.EaseCommonUtils;
+import cn.ucai.superwechat.utils.ResultUtils;
+
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 
@@ -608,7 +613,7 @@ public class SuperWeChatHelper {
     public class MyContactListener implements EMContactListener {
 
         @Override
-        public void onContactAdded(String username) {
+        public void onContactAdded(final String username) {
             // save contact
             Map<String, EaseUser> localUsers = getContactList();
             Map<String, EaseUser> toAddUsers = new HashMap<String, EaseUser>();
@@ -620,6 +625,32 @@ public class SuperWeChatHelper {
             toAddUsers.put(username, user);
             localUsers.putAll(toAddUsers);
 
+            //添加好友关系
+            final Map<String,User> localAppUsers = getAppContactList();
+            if(!localAppUsers.containsKey(username)){
+                NetDao.addContact(appContext,EMClient.getInstance().getCurrentUser() ,username, new OkHttpUtils.OnCompleteListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if(s!=null){
+                            Result result = ResultUtils.getResultFromJson(s,User.class);
+                            if(result!=null&&result.isRetMsg()){
+                                User u = (User) result.getRetData();
+//                                userDao.saveAppContact(u); //保存到数据库
+                                saveAppContact(u); //保持到内存和数据库
+//                                localAppUsers.put(username,u);
+//                                setAppContactList(localAppUsers);
+                                broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+            }
+//            localAppUsers.put(username,);
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
 
