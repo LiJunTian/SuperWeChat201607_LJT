@@ -49,13 +49,15 @@
         android:textColor="@color/white"
         android:layout_marginRight="16dp"
         android:visibility="gone"/>
-    <ImageView
+    <Button
         android:id="@+id/title_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_addfriend"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:background="@drawable/umeng_common_gradient_green"
+        android:text="发送"
         android:visibility="gone"/>
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:background="#f2f2f2"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
@@ -21,7 +21,8 @@
             android:text="@string/Application_and_notify"
             android:textColor="#fff"
             android:textSize="18sp" />
-    </RelativeLayout>
+    </RelativeLayout>-->
+    <include layout="@layout/title"/>
 
     <ListView
         android:id="@+id/list"
