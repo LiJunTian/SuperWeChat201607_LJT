@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +67,7 @@ public class RegisterActivity extends BaseActivity {
 
     ProgressDialog pd;
     @BindView(R.id.register_and_login_title)
-    LinearLayout registerAndLoginTitle;
+    RelativeLayout registerAndLoginTitle;
     @BindView(R.id.register_and_login_title_back)
     ImageView registerAndLoginTitleBack;
     @BindView(R.id.tv_title_text)
