@@ -176,6 +176,7 @@ public class EaseContactAdapter extends ArrayAdapter<User> implements SectionInd
                 final ArrayList<User> newValues = new ArrayList<User>();
                 for(int i=0;i<count;i++){
                     final User user = mOriginalList.get(i);
+                    //过滤，搜索用户名或昵称中含有某字符的联系人
                     String username = user.getMUserName();
                     String nickname = user.getMUserNick();
                     if(username.contains(prefixString)||nickname.contains(prefixString)){
