@@ -43,6 +43,7 @@ public class UserDetailActivity extends BaseActivity {
         user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
         if (user == null) {
             MFGT.finish(this);
+            return;
         }
         initView();
     }
@@ -80,6 +81,7 @@ public class UserDetailActivity extends BaseActivity {
                 MFGT.gotoAddFriendActivity(this,user.getMUserName());
                 break;
             case R.id.btn_detail_sendMsg:
+                MFGT.gotoChatActivity(this,user.getMUserName());
                 break;
             case R.id.btn_detail_video:
                 break;
