@@ -22,9 +22,13 @@ import cn.ucai.easeui.domain.User;
 import cn.ucai.easeui.utils.EaseUserUtils;
 import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.data.NetDao;
+import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
 import cn.ucai.superwechat.utils.MFGT;
+import cn.ucai.superwechat.utils.ResultUtils;
 import cn.ucai.superwechat.widget.ContactItemView;
 import cn.ucai.easeui.domain.EaseUser;
 import cn.ucai.easeui.ui.EaseContactListFragment;
@@ -132,7 +136,7 @@ public class ContactListFragment extends EaseContactListFragment {
         });
 
         
-        // 进入添加好友页
+//         进入添加好友页
 //        titleBar.getRightLayout().setOnClickListener(new OnClickListener() {
 //
 //            @Override
@@ -224,6 +228,7 @@ public class ContactListFragment extends EaseContactListFragment {
                 // remove invitation message
                 InviteMessgeDao dao = new InviteMessgeDao(getActivity());
                 dao.deleteMessage(toBeProcessUser.getUsername());
+//                deleteAppContact(toBeProcessUsername);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -249,6 +254,25 @@ public class ContactListFragment extends EaseContactListFragment {
 		pd.setMessage(st1);
 		pd.setCanceledOnTouchOutside(false);
 		pd.show();
+
+        NetDao.deleteContact(getActivity(), EMClient.getInstance().getCurrentUser(), tobeDeleteUser.getUsername(), new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if(s!=null){
+                    Result result = ResultUtils.getResultFromJson(s,User.class);
+                    if(result!=null&&result.isRetMsg()){
+//                        SuperWeChatHelper.getInstance().getAppContactList().remove(tobeDeleteUser.getUsername());
+                        SuperWeChatHelper.getInstance().delAppContact(tobeDeleteUser.getUsername());
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
 		new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -262,7 +286,6 @@ public class ContactListFragment extends EaseContactListFragment {
 							pd.dismiss();
 							contactList.remove(tobeDeleteUser);
 							contactListLayout.refresh();
-
 						}
 					});
 				} catch (final Exception e) {
@@ -279,6 +302,28 @@ public class ContactListFragment extends EaseContactListFragment {
 		}).start();
 
 	}
+
+
+//    public void deleteAppContact(final String toDelUserName) {
+//        NetDao.deleteContact(getContext(),EMClient.getInstance().getCurrentUser() ,toDelUserName, new OkHttpUtils.OnCompleteListener<String>() {
+//            @Override
+//            public void onSuccess(String s) {
+//                if(s!=null){
+//                    Result result = ResultUtils.getResultFromJson(s,User.class);
+//                    if(result!=null&&result.isRetMsg()){
+//                        Map<String, User> appContactList = SuperWeChatHelper.getInstance().getAppContactList();
+//                        appContactList.remove(toDelUserName);
+//                        contactListLayout.refresh();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onError(String error) {
+//
+//            }
+//        });
+//    }
 
 	class ContactSyncListener implements SuperWeChatHelper.DataSyncListener {
         @Override
