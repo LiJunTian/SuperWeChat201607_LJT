@@ -3,9 +3,13 @@ package cn.ucai.superwechat.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
+import cn.ucai.superwechat.I;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.easeui.ui.EaseChatFragment;
+import cn.ucai.superwechat.utils.L;
+
 import com.hyphenate.util.EasyUtils;
 
 /**
@@ -54,10 +58,12 @@ public class ChatActivity extends BaseActivity{
     @Override
     public void onBackPressed() {
         chatFragment.onBackPressed();
-        if (EasyUtils.isSingleActivity(this)) {
+//        if (EasyUtils.isSingleActivity(this)) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(I.ACTION_BACK_CONVERSION,true);
+            L.e("ChatActivity","chat发送广播啦");
             startActivity(intent);
-        }
+//        }
     }
     
     public String getToChatUsername(){
