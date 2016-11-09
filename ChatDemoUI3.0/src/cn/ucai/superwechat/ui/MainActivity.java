@@ -307,12 +307,12 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 			public void run() {
 				// refresh unread count
 				updateUnreadLabel();
-				if (currentTabIndex == 0) {
+//				if (currentTabIndex == 0) {
 					// refresh conversation list
 					if (conversationListFragment != null) {
 						conversationListFragment.refresh();
 					}
-				}
+//				}
 			}
 		});
 	}
@@ -366,6 +366,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 
 	@Override
 	public void onCheckedChange(int checkedPosition, boolean byUser) {
+
 		currentTabIndex = checkedPosition;
 		mLayoutViewpage.setCurrentItem(checkedPosition,true);
 	}
@@ -437,10 +438,12 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 	 */
 	public void updateUnreadLabel() {
 		int count = getUnreadMsgCountTotal();
+		mLayoutTabhost.setUnreadCount(0,count);
 //		if (count > 0) {
 //			unreadLabel.setText(String.valueOf(count));
 //			unreadLabel.setVisibility(View.VISIBLE);
 //		} else {
+
 //			unreadLabel.setVisibility(View.INVISIBLE);
 //		}
 	}
