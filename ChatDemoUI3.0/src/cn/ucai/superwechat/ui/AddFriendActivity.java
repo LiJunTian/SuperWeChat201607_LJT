@@ -3,6 +3,7 @@ package cn.ucai.superwechat.ui;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class AddFriendActivity extends BaseActivity {
     @BindView(R.id.tv_title_text)
     TextView tvTitleText;
     @BindView(R.id.title_send)
-    ImageView titleSend;
+    Button titleSend;
     @BindView(R.id.tv_add_text)
     EditText tvAddText;
     private ProgressDialog progressDialog;
