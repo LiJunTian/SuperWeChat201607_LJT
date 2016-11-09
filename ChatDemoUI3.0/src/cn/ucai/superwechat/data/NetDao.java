@@ -131,4 +131,20 @@ public class NetDao {
                 .targetClass(String.class)
                 .execute(listener);
     }
+
+    /**
+     * 根据用户名删除好友
+     * @param context 上下文
+     * @param userName 用户名
+     * @param cUserName 添加的联系人
+     * @param listener 监听
+     */
+    public static void deleteContact(Context context, String userName, String cUserName,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DELETE_CONTACT)
+                .addParam(I.Contact.USER_NAME,userName)
+                .addParam(I.Contact.CU_NAME,cUserName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }
