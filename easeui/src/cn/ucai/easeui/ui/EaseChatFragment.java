@@ -25,6 +25,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baidu.platform.comapi.map.I;
 import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
@@ -41,6 +42,7 @@ import com.hyphenate.easeui.R;
 import cn.ucai.easeui.controller.EaseUI;
 import cn.ucai.easeui.domain.EaseEmojicon;
 import cn.ucai.easeui.domain.EaseUser;
+import cn.ucai.easeui.domain.User;
 import cn.ucai.easeui.model.EaseAtMessageHelper;
 import cn.ucai.easeui.utils.EaseCommonUtils;
 import cn.ucai.easeui.utils.EaseUserUtils;
@@ -58,6 +60,7 @@ import com.hyphenate.util.PathUtil;
 
 import java.io.File;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -182,12 +185,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     protected void setUpView() {
         titleBar.setTitle(toChatUsername);
+        //设置聊天室标题背景颜色
+        titleBar.setBackgroundColor(getResources().getColor(com.hyphenate.easeui.R.color.black_deep));
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             // set title
             if(EaseUserUtils.getUserInfo(toChatUsername) != null){
-                EaseUser user = EaseUserUtils.getUserInfo(toChatUsername);
+                //设置聊天室标题昵称
+                User user = EaseUserUtils.getAppUserInfo(toChatUsername);
                 if (user != null) {
-                    titleBar.setTitle(user.getNick());
+                    titleBar.setTitle(user.getMUserNick());
                 }
             }
             titleBar.setRightImageResource(R.drawable.ease_mm_title_remove);
@@ -453,6 +459,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     public void onBackPressed() {
         if (inputMenu.onBackPressed()) {
             getActivity().finish();
+
             if(chatType == EaseConstant.CHATTYPE_GROUP){
                 EaseAtMessageHelper.get().removeAtMeGroup(toChatUsername);
                 EaseAtMessageHelper.get().cleanToAtUserList();
