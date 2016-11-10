@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.File;
 
 import cn.ucai.superwechat.I;
+import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.utils.MD5;
 import cn.ucai.superwechat.bean.Result;
 
@@ -144,6 +145,20 @@ public class NetDao {
         utils.setRequestUrl(I.REQUEST_DELETE_CONTACT)
                 .addParam(I.Contact.USER_NAME,userName)
                 .addParam(I.Contact.CU_NAME,cUserName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    /**
+     * 下载所有好友联系人列表
+     * @param context 上下文
+     * @param listener 监听
+     */
+    public static void loadContact(Context context,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        String userName = SuperWeChatHelper.getInstance().getCurrentUsernName();
+        utils.setRequestUrl(I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST)
+                .addParam(I.Contact.USER_NAME,userName)
                 .targetClass(String.class)
                 .execute(listener);
     }

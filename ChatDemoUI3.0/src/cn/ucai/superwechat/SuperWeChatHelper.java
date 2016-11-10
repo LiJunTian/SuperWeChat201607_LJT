@@ -1103,7 +1103,39 @@ public class SuperWeChatHelper {
        }
        
        isSyncingContactsWithServer = true;
-       
+       //下载数据库中好友联系人列表
+       NetDao.loadContact(appContext, new OkHttpUtils.OnCompleteListener<String>() {
+           @Override
+           public void onSuccess(String s) {
+               if(s!=null){
+                   Result result = ResultUtils.getListResultFromJson(s,User.class);
+                   if(result!=null&&result.isRetMsg()){
+                       List<User> list = (List<User>) result.getRetData();
+                       if(list!=null&&list.size()>0){
+                           L.e(TAG,"list="+list.size());
+                       }
+                       Map<String, User> userContactList = new HashMap<String, User>();
+                       for (User user : list) {
+                           EaseCommonUtils.setAppUserInitialLetter(user);
+                           userContactList.put(username, user);
+                       }
+                       // save the contact list to cache
+                       getAppContactList().clear();
+                       getAppContactList().putAll(userContactList);
+                       // save the contact list to database
+                       UserDao dao = new UserDao(appContext);
+                       List<User> users = new ArrayList<User>(userContactList.values());
+                       dao.saveAppContactList(users);
+                       broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
+                   }
+               }
+           }
+
+           @Override
+           public void onError(String error) {
+
+           }
+       });
        new Thread(){
            @Override
            public void run(){
