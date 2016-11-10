@@ -27,6 +27,7 @@ import cn.ucai.superwechat.data.NetDao;
 import cn.ucai.superwechat.data.OkHttpUtils;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.utils.ResultUtils;
 import cn.ucai.superwechat.widget.ContactItemView;
@@ -105,15 +106,19 @@ public class ContactListFragment extends EaseContactListFragment {
     @SuppressWarnings("unchecked")
     @Override
     protected void setUpView() {
-//        titleBar.setRightImageResource(R.drawable.em_add);
-//        titleBar.setRightLayoutClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-////                startActivity(new Intent(getActivity(), AddContactActivity.class));
-//                NetUtils.hasDataConnection(getActivity());
-//            }
-//        });
+        if(titleBar==null){
+            L.e("ContactListFragment","titleBar为空了");
+        }
+        titleBar.setRightImageResource(R.drawable.em_add);
+        hideTitleBar();
+        titleBar.setRightLayoutClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), AddContactActivity.class));
+                NetUtils.hasDataConnection(getActivity());
+            }
+        });
         //设置联系人数据
         Map<String,User> m = SuperWeChatHelper.getInstance().getAppContactList();
         if (m instanceof Hashtable<?, ?>) {

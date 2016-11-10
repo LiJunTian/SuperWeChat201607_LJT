@@ -25,17 +25,17 @@ public abstract class EaseBaseFragment extends Fragment{
         setUpView();
     }
     
-//    public void showTitleBar(){
-//        if(titleBar != null){
-//            titleBar.setVisibility(View.VISIBLE);
-//        }
-//    }
+    public void showTitleBar(){
+        if(titleBar != null){
+            titleBar.setVisibility(View.VISIBLE);
+        }
+    }
     
-//    public void hideTitleBar(){
-//        if(titleBar != null){
-//            titleBar.setVisibility(View.GONE);
-//        }
-//    }
+    public void hideTitleBar(){
+        if(titleBar != null){
+            titleBar.setVisibility(View.GONE);
+        }
+    }
     
     protected void hideSoftKeyboard() {
         if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
