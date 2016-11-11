@@ -236,7 +236,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
         return new CustomChatRowProvider();
     }
   
-
+    //实现进入群聊详情的接口
     @Override
     public void onEnterToChatDetails() {
         if (chatType == Constant.CHATTYPE_GROUP) {

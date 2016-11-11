@@ -217,6 +217,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             onMessageListInit();
         }
 
+
         titleBar.setLeftLayoutClickListener(new OnClickListener() {
 
             @Override
@@ -224,6 +225,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                 onBackPressed();
             }
         });
+        //titleBar右侧的点击事件，可以进入群详情
         titleBar.setRightLayoutClickListener(new OnClickListener() {
 
             @Override
@@ -898,7 +900,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     /**
      * open group detail
-     * 
+     * 打开群详情
      */
     protected void toGroupDetails() {
         if (chatType == EaseConstant.CHATTYPE_GROUP) {

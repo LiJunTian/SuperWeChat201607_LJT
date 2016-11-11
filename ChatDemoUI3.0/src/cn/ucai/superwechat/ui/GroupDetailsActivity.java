@@ -607,8 +607,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 //				Drawable avatar = getResources().getDrawable(R.drawable.default_avatar);
 //				avatar.setBounds(0, 0, referenceWidth, referenceHeight);
 //				button.setCompoundDrawables(null, avatar, null, null);
-				EaseUserUtils.setUserNick(username, holder.textView);
-				EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+				//设置群详情成员头像和昵称
+				EaseUserUtils.setAppUserNick(username, holder.textView);
+				EaseUserUtils.setAppUserAvatar(getContext(), username, holder.imageView);
 				if (isInDeleteMode) {
 					// 如果是删除模式下，显示减人图标
 					convertView.findViewById(cn.ucai.superwechat.R.id.badge_delete).setVisibility(View.VISIBLE);
