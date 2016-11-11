@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="#eee"
     android:orientation="vertical" >
-
+    //修改群聊资料title背景色
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
-        android:background="@color/top_bar_normal_bg"
+        android:background="@color/black_deep"
         android:gravity="center_vertical" >
 		
         <include 

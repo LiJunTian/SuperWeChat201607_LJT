@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg"
     android:orientation="vertical" >
-
+    //修改公开的群组的title背景色
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_top_bar"
-        android:background="@color/top_bar_normal_bg"
+        android:background="@color/black_deep"
         android:gravity="center_vertical" >
 
         <include layout="@layout/ease_commom_back_btn" />
