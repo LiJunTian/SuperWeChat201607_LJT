@@ -2,9 +2,11 @@ package cn.ucai.easeui.utils;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.platform.comapi.map.L;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.chat.EMClient;
@@ -12,6 +14,7 @@ import com.hyphenate.easeui.R;
 
 import cn.ucai.easeui.controller.EaseUI;
 import cn.ucai.easeui.domain.EaseUser;
+import cn.ucai.easeui.domain.Group;
 import cn.ucai.easeui.domain.User;
 
 public class EaseUserUtils {
@@ -104,6 +107,24 @@ public class EaseUserUtils {
         }
     }
 
+    /**
+     * set group avatar
+     */
+    //设置群组头像
+    public static void setAppGroupAvatar(Context context, String hxid, ImageView imageView){
+        if(hxid!=null) {
+            try {
+                Log.e("GroupAdapter","setAppGroupAvatar执行啦");
+                int avatarResId = Integer.parseInt(Group.getAvatar(hxid));
+                Glide.with(context).load(avatarResId).into(imageView);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(context).load(Group.getAvatar(hxid)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_group_icon).into(imageView);
+            }
+            }else{
+                Glide.with(context).load(R.drawable.ease_group_icon).into(imageView);
+        }
+    }
     /**
      * set user's nickname
      */
