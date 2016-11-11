@@ -22,6 +22,7 @@ import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.data.NetDao;
 import cn.ucai.superwechat.data.OkHttpUtils;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.utils.ResultUtils;
 
@@ -69,8 +70,10 @@ public class UserDetailActivity extends BaseActivity {
     }
 
     private void syncFail(){
-        MFGT.finish(this);
-        return;
+        if(!isFriend){
+            MFGT.finish(this);
+            return;
+        }
     }
     private void syncUserInfo() {
         NetDao.syncUserInfo(this, username, new OkHttpUtils.OnCompleteListener<String>() {
@@ -79,12 +82,14 @@ public class UserDetailActivity extends BaseActivity {
                 if(s!=null){
                     Result result = ResultUtils.getResultFromJson(s,User.class);
                     if(result!=null&&result.isRetMsg()){
-                        user = (User) result.getRetData();
-                        if(user!=null){
-                            setUserInfo();
+                        User u = (User) result.getRetData();
+                        if(u!=null){
+                            L.e("UserDetailActivity","u="+u.getAvatar());
                             if(isFriend){
-                                SuperWeChatHelper.getInstance().saveAppContact(user);
+                                SuperWeChatHelper.getInstance().saveAppContact(u);
                             }
+                            user = u;
+                            setUserInfo();
                         }else{
                             syncFail();
                         }
