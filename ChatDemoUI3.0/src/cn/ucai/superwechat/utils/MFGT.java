@@ -72,10 +72,10 @@ public class MFGT {//从哪来到哪去move from go to
         startActivity(context,intent);
     }
 
-    public static void gotoUserDetailActivity(Context context,User user){
+    public static void gotoUserDetailActivity(Context context,String username){
         Intent intent = new Intent();
         intent.setClass(context,UserDetailActivity.class);
-        intent.putExtra(I.User.USER_NAME,user);
+        intent.putExtra(I.User.USER_NAME,username);
         startActivity(context,intent);
     }
 
