@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -39,6 +40,9 @@ import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.ucai.easeui.utils.EaseUserUtils;
+import cn.ucai.superwechat.R;
 
 public class PublicGroupsActivity extends BaseActivity {
 	private ProgressBar pb;
@@ -164,12 +168,13 @@ public class PublicGroupsActivity extends BaseActivity {
 	 *
 	 */
 	private class GroupsAdapter extends ArrayAdapter<EMGroupInfo> {
-
+        Context mContext;
 		private LayoutInflater inflater;
 
 		public GroupsAdapter(Context context, int res, List<EMGroupInfo> groups) {
 			super(context, res, groups);
 			this.inflater = LayoutInflater.from(context);
+            mContext = context;
 		}
 
 		@Override
@@ -179,8 +184,10 @@ public class PublicGroupsActivity extends BaseActivity {
 			}
 
 			((TextView) convertView.findViewById(cn.ucai.superwechat.R.id.name)).setText(getItem(position).getGroupName());
-
-			return convertView;
+            //公开群聊界面添加头像
+            EaseUserUtils.setAppGroupAvatar(mContext,getItem(position).getGroupId(),
+                    (ImageView)convertView.findViewById(R.id.avatar));
+            return convertView;
 		}
 	}
 	
