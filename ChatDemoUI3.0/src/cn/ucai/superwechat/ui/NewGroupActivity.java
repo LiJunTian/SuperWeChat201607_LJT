@@ -57,6 +57,7 @@ import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.data.NetDao;
 import cn.ucai.superwechat.data.OkHttpUtils;
+import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.ResultUtils;
 
@@ -79,6 +80,7 @@ public class NewGroupActivity extends BaseActivity {
     private ProgressDialog progressDialog;
     File avatarFile = null;
 
+    EMGroup emGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,9 +116,9 @@ public class NewGroupActivity extends BaseActivity {
         if (resultCode == RESULT_OK&&requestCode==REQUESTCODE_SELECT) {
             //new group
             progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage(st1);
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+//            progressDialog.setMessage(st1);
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
 
             new Thread(new Runnable() {
                 @Override
@@ -136,12 +138,12 @@ public class NewGroupActivity extends BaseActivity {
                         } else {
                             option.style = memberCheckbox.isChecked() ? EMGroupStyle.EMGroupStylePrivateMemberCanInvite : EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
                         }
-                        EMGroup group = EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
-                        createAppGroup(group);
+                        emGroup = EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
+                        createAppGroup();
                     } catch (final HyphenateException e) {
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                progressDialog.dismiss();
+//                                progressDialog.dismiss();
                                 Toast.makeText(NewGroupActivity.this, st2 + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
@@ -169,35 +171,43 @@ public class NewGroupActivity extends BaseActivity {
         }
     }
 
-    private void createAppGroup(EMGroup emGroup) {
+    private void createAppGroup() {
         if (avatarFile == null) {
-            NetDao.CreateGroup(this, emGroup, new OkHttpUtils.OnCompleteListener<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    if (s != null) {
-                        afterCreateAppGroup(s);
-                    }
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-            });
+            NetDao.CreateGroup(this, emGroup, listener);
         } else {
-            NetDao.CreateGroup(this, emGroup, avatarFile, new OkHttpUtils.OnCompleteListener<String>() {
-                @Override
-                public void onSuccess(String s) {
-                    afterCreateAppGroup(s);
-                }
-
-                @Override
-                public void onError(String error) {
-
-                }
-            });
+            NetDao.CreateGroup(this, emGroup, avatarFile, listener);
         }
     }
+
+        OkHttpUtils.OnCompleteListener<String> listener =  new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s != null) {
+                    Result result = ResultUtils.getResultFromJson(s,Group.class);
+                    L.e("NewGroupActivity","result="+result);
+                    if(result!=null&&result.isRetMsg()){
+                        if(emGroup!=null&&emGroup.getMembers()!=null&&emGroup.getMembers().size()>1){
+                            //添加群组成员
+                            addGroupMembers();
+                        }else{
+                            createGroupSuccess();
+                        }
+                    }else{
+                        progressDialog.dismiss();
+                        CommonUtils.showShortToast("创建群组失败");
+                    }
+                }else{
+                    progressDialog.dismiss();
+                    CommonUtils.showShortToast("创建群组失败");
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDialog.dismiss();
+                CommonUtils.showShortToast("创建群组失败");
+            }
+        };
 
     private void afterCreateAppGroup(String s) {
         if (s != null) {
@@ -214,7 +224,7 @@ public class NewGroupActivity extends BaseActivity {
     private void createGroupSuccess() {
         runOnUiThread(new Runnable() {
             public void run() {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 setResult(RESULT_OK);
                 finish();
             }
@@ -301,6 +311,32 @@ public class NewGroupActivity extends BaseActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+
+    private void addGroupMembers(){
+        NetDao.addGroupMembers(this, emGroup, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if(s!=null){
+                    Result result = ResultUtils.getResultFromJson(s,Group.class);
+                    if(result!=null&&result.isRetMsg()){
+                        createGroupSuccess();
+                    }else{
+                        progressDialog.dismiss();
+                        CommonUtils.showShortToast("创建群组失败");
+                    }
+                }else{
+                    progressDialog.dismiss();
+                    CommonUtils.showShortToast("创建群组失败");
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDialog.dismiss();
+                CommonUtils.showShortToast("创建群组失败");
+            }
+        });
     }
 
     @OnClick(R.id.iv_groupAvatar)
