@@ -86,7 +86,7 @@
     <string name="save_new_nickname">Save new nickname</string>
     <string name="nickname_description">Once this nickname is set, it will be used in push notification (by default this is user ID ) when the receiver is using the iOS device.</string>
     <string name="group_chat">Group chat</string>
-    <string name="chat_room">Chat room</string>
+    <string name="chat_room">live room</string>
     <string name="add_friend">Add friends</string>
     <string name="search">Search</string>
     <string name="black_item">Black list</string>
@@ -316,7 +316,7 @@
     <string name="searching">searching</string>
     <string name="hanging_up">Hanging up..</string>
     <string name="illegal_user_name">Illegal user name</string>
-    <string name="robot_chat">Robot chat</string>
+    <string name="robot_chat">robot room</string>
     <string name="title_user_profile">Profile</string>
     <string name="nickname">Nickname</string>
     <string name="dl_title_upload_photo">Upload Photo</string>
